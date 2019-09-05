@@ -1,0 +1,9 @@
+
+const actionType = {
+    GET_USER_INFO:'GET_USER_INFO',
+    UPDATE_USER_INFO:'UPDATE_USER_INFO',
+    UPDATE_MENU_LIST:'UPDATE_MENU_LIST',
+    UPDATE_AUTH_DATA:'UPDATE_AUTH_DATA'
+};
+
+export default actionType;
