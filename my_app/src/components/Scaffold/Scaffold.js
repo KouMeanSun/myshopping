@@ -36,9 +36,13 @@ class Scaffold extends React.Component{
      * 生成路由组件
      */
     mapRoutes = (routes,parentPath = '') => {
-        routes && routes.forEach((component,path,children) => {
+        let routeCount = 0;
+        routes && routes.forEach(({component,path,children}) => {
+            // console.log('routeCount',routeCount);
+            // console.log('component:',component);
             let currentPath = parentPath === '/' ? path : `${parentPath}${path}`;
             if (component){
+                // console.log('this._Routes:',this._Routes);
                 this._Routes.push(
                     <Route
                         key={path}
@@ -49,6 +53,7 @@ class Scaffold extends React.Component{
                 );
             }
             if (children && children.length > 0) {
+                // console.log('children && children.length > 0:',children);
                 this.mapRoutes(children,currentPath);
             }
         });
@@ -142,7 +147,7 @@ class Scaffold extends React.Component{
                     stack.pop();
                 }
             }
-            console.log('this.state:',this.state);
+            // console.log('this.state:',this.state);
         };
         const menuStack = [];
         const selectedKeys = [];
@@ -161,14 +166,14 @@ class Scaffold extends React.Component{
                 breadcrumbName:selectedMenu.title
             };
         }
-        // while ((selectedMenu == menuStack.shift())){
-        //         if ( !selectedMenu.key) continue; ///这个  selectedMenu 为undefined，不知道为啥
-        //         openKeys.push(selectedMenu.key + '');
-        //         breadcrumbRoutes.push({
-        //             path: selectedMenu.path,
-        //             breadcrumbName: selectedMenu.title
-        //         });
-        // }
+        while ((selectedMenu == menuStack.shift())){
+                if ( !selectedMenu.key) continue; ///这个  selectedMenu 为undefined，不知道为啥
+                openKeys.push(selectedMenu.key + '');
+                breadcrumbRoutes.push({
+                    path: selectedMenu.path,
+                    breadcrumbName: selectedMenu.title
+                });
+        }
         lastBreadcrumbItem && breadcrumbRoutes.push(lastBreadcrumbItem);
         return {selectedKeys,breadcrumbRoutes,openKeys};
     }
@@ -245,7 +250,7 @@ class Scaffold extends React.Component{
     };
 
     render() {
-        console.log('this.props:',this.props);
+        // console.log('this.props:',this.props);
         this.mapRoutes(this.props.menu.length ? this.props.menu : this.props.initMenu);
         //只显示当前页面title
         // const breadcrumbRoutes = this.state.breadcrumbRoutes.length > 0

@@ -11,7 +11,7 @@ export default () => {
                 <Route  path="/">
                     <Scaffold
                         headerTitle="爱生活购物app"
-                        // initMenu={MENU}
+                        initMenu={MENU}
 
                     />
                 </Route>
