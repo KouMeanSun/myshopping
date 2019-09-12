@@ -36,7 +36,7 @@ class Scaffold extends React.Component{
      * 生成路由组件
      */
     mapRoutes = (routes,parentPath = '') => {
-        routes && routes.forEach((component,path,children) => {
+        routes && routes.forEach(({component,path,children}) => {
             let currentPath = parentPath === '/' ? path : `${parentPath}${path}`;
             if (component){
                 this._Routes.push(
