@@ -166,7 +166,7 @@ class Scaffold extends React.Component{
                 breadcrumbName:selectedMenu.title
             };
         }
-        while ((selectedMenu == menuStack.shift())){
+        while ((selectedMenu = menuStack.shift())){
                 if ( !selectedMenu.key) continue; ///这个  selectedMenu 为undefined，不知道为啥
                 openKeys.push(selectedMenu.key + '');
                 breadcrumbRoutes.push({
@@ -191,7 +191,7 @@ class Scaffold extends React.Component{
             this.props.menu !== nextProps.menu
         ){
             const menu = nextProps.menu.length
-            ? nextProps.menu.filter(menuItem => nextProps.location.pathname.startsWith(menuItem.pathname))
+            ? nextProps.menu.filter(menuItem => nextProps.location.pathname.startsWith(menuItem.path))
                 : nextProps.initMenu || [];
 
             const {openKeys,selectedKeys,breadcrumbRoutes } = this.getMenuState({
@@ -266,7 +266,6 @@ class Scaffold extends React.Component{
         //             delete item['key'];
         //         });
         // }
-
         return (
             <Layout  className="scaffold" style={{height:'100%'}}>
                 <Header  className="scaffold-header">
